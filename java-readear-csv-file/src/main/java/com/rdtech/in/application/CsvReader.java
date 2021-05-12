@@ -21,6 +21,41 @@ public class CsvReader {
 	public static String columnsplitter;
 	public static String filenames[];
 	
+	
+	 public static List<String>  rows(String str){
+		 
+		 String[] splitted = Arrays.stream(str.split(rowsplitter)).map(String::trim).toArray(String[]::new);
+
+		return Arrays.asList(splitted);
+		 
+	 }
+
+	public static void column(List<String> list) {
+		
+		boolean skipHeader = true;
+		
+		for (String string : list) {
+			String[] line = Arrays.stream(string.split(columnsplitter)).map(String::trim).toArray(String[]::new);
+
+			// System.out.println(Arrays.toString(line));
+
+			if (skipHeader) {
+				skipHeader = false;
+				continue;
+			}
+
+			String firstname = line[0];
+			String lastname = line[1];
+			String city = line[2];
+			String salary = line[3];
+			
+
+			System.out.println("firstname="+firstname+", lastname="+lastname+", city="+city+", salary="+salary);
+		}
+		
+		
+	}
+	
 
 	public static void main(String[] args) throws IOException {
 		
@@ -50,37 +85,14 @@ public class CsvReader {
 
 		String str = new String(bytes);
 
-		String[] splitted = Arrays.stream(str.split(rowsplitter)).map(String::trim).toArray(String[]::new);
-
-
-		List<String> list = Arrays.asList(splitted);
-
-
-		boolean skipHeader = true;
-		
-		
 		System.out.println();
+		System.out.println("-----------------------------------------------");
 		System.out.println("file name ="+filenames[i]);
-
-		for (String string : list) {
-			String[] line = Arrays.stream(string.split(columnsplitter)).map(String::trim).toArray(String[]::new);
-
-			// System.out.println(Arrays.toString(line));
-
-			if (skipHeader) {
-				skipHeader = false;
-				continue;
-			}
-
-			String firstname = line[0];
-			String lastname = line[1];
-			String city = line[2];
-			String salary = line[3];
-			
-
-			System.out.println("firstname="+firstname+", lastname="+lastname+", city="+city+", salary="+salary);
-		}
+        System.out.println("-----------------------------------------------");
 		
+		List<String> list = rows(str);
+        column(list);
+        
 		}
 	}
 
