@@ -5,5 +5,6 @@ This repository consists of an application responsible for reading records from 
 
 To deploy this application Kindle refer to the article given below:
 
+https://www.linkedin.com/pulse/how-read-csv-files-java-dhruv-sahu
 
 
